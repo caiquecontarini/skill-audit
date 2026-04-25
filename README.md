@@ -1,16 +1,16 @@
-# skill-audit
+﻿# skill-audit
 
 Static analysis for Claude Code / Agent SDK skills. Audits `SKILL.md` against
 10 QA checks to verify a skill will trigger and execute correctly across LLMs
 (Claude, GPT, Gemini).
 
-Built from an audit of 119 production skills (score went from 5.9 → 10.0/10).
+Built from an audit of 119 production skills (score went from 5.9 â†’ 10.0/10).
 
 ---
 
 ## Why this exists
 
-Skills written for Claude pre-4.5 often work only in the author's context —
+Skills written for Claude pre-4.5 often work only in the author's context â€”
 they have thin descriptions, vague workflows, no negative boundaries, no evals.
 When you try to run them in:
 
@@ -74,8 +74,8 @@ python3 scripts/audit.py ~/.claude/skills/ --json -o audit.json
 
 ```
 skill-audit: 12 skills analisadas
-  Score médio: 7.1/10
-  Passing (≥7): 4/12 (33%)
+  Score mÃ©dio: 7.1/10
+  Passing (â‰¥7): 4/12 (33%)
 
 Report: audit-results.md
 ```
@@ -83,7 +83,7 @@ Report: audit-results.md
 The markdown report includes:
 - Score distribution
 - Issues ranked by frequency
-- Skills ranked worst → best
+- Skills ranked worst â†’ best
 - Detailed per-skill breakdown
 
 ---
@@ -93,10 +93,10 @@ The markdown report includes:
 1. **Name in kebab-case** matching folder name
 2. **Description** with 50+ words, third person, 5+ trigger phrases, negative boundaries
 3. **Workflow** steps are single, imperative, unambiguous
-4. **2+ examples** with real input → real output
+4. **2+ examples** with real input â†’ real output
 5. **Edge cases** covered (3+ conditions with specific action)
 6. **Output format** explicitly defined
-7. **Zero vague language** (`handle appropriately`, `as needed`, etc — banned)
+7. **Zero vague language** (`handle appropriately`, `as needed`, etc â€” banned)
 8. **Negative boundaries** in body (`## When NOT to Use`)
 9. **Zero hardcoded secrets** (API keys, tokens)
 10. **`evals/evals.json`** with 2+ cases
@@ -108,23 +108,23 @@ Full spec: [`references/qa-checklist.md`](references/qa-checklist.md).
 ## Before / After
 
 See [`examples/before.md`](examples/before.md) (score 3/10) vs
-[`examples/after.md`](examples/after.md) (score 10/10) — same skill, same
+[`examples/after.md`](examples/after.md) (score 10/10) â€” same skill, same
 behavior, but one triggers reliably in any LLM.
 
 ---
 
 ## Template
 
-[`templates/SKILL-TEMPLATE.md`](templates/SKILL-TEMPLATE.md) — copy-paste
+[`templates/SKILL-TEMPLATE.md`](templates/SKILL-TEMPLATE.md) â€” copy-paste
 skeleton for new V3-compliant skills.
 
 ---
 
 ## When NOT to use skill-audit
 
-- Creating a skill from scratch — use [`criar-skill`](https://github.com/okjpg/skill-creator) instead
-- Executing the skill being audited — run it directly
-- Security audit (OWASP, production secrets) — this tool is for structural
+- Creating a skill from scratch â€” use [`criar-skill`](https://github.com/okjpg/skill-creator) instead
+- Executing the skill being audited â€” run it directly
+- Security audit (OWASP, production secrets) â€” this tool is for structural
   quality, not security posture
 
 ---
@@ -133,7 +133,7 @@ skeleton for new V3-compliant skills.
 
 - Does not audit semantic quality of the workflow (whether the steps make sense
   for your domain)
-- Static analysis only — does not execute the skill
+- Static analysis only â€” does not execute the skill
 - Trigger phrase heuristics can false-positive on dense technical descriptions.
   Review borderline scores (6-7) manually.
 
@@ -141,15 +141,19 @@ skeleton for new V3-compliant skills.
 
 ## Built by
 
-[Bruno Okamoto](https://github.com/okjpg) — part of the
+[Bruno Okamoto](https://github.com/okjpg) â€” part of the
 [Pixel AI Hub](https://pixel.ai.br) curriculum.
 
 Related:
-- [`second-brain-amora`](https://github.com/okjpg/second-brain-amora) — persistent memory system for Claude Code
-- [`skill-creator`](https://github.com/okjpg/skill-creator) — generate new skills from workflows
+- [`second-brain-amora`](https://github.com/okjpg/second-brain-amora) â€” persistent memory system for Claude Code
+- [`skill-creator`](https://github.com/okjpg/skill-creator) â€” generate new skills from workflows
 
 ---
 
 ## License
 
 MIT.
+
+
+---
+*Créditos originais da metodologia: [Bruno Okamoto](https://github.com/okjpg)*

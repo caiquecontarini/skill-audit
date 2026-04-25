@@ -1,4 +1,4 @@
-# 10 QA Checks — V3 Skill Standard
+﻿# 10 QA Checks â€” V3 Skill Standard
 
 > Every `SKILL.md` must pass these 10 checks before being marked ATIVO.
 > Failing skills don't trigger reliably in non-Claude LLMs (GPT, Gemini).
@@ -8,17 +8,17 @@
 ## The 10 critical checks
 
 ```
-□ 1. Name in kebab-case and matches folder name
-□ 2. Description has 50+ words, third person, 5+ trigger phrases, negative boundaries
-□ 3. Every Workflow step is a single, imperative, unambiguous action
-□ 4. At least 2 concrete examples (real input → real output)
-□ 5. Edge Cases covered (3+ conditions with specific action)
-□ 6. Output Format explicitly defined (structure, sections, delivery)
-□ 7. Zero vague language ("handle appropriately", "format nicely", "as needed",
-     "quando relevante", "se fizer sentido" — all FORBIDDEN)
-□ 8. Negative boundaries also in body (## When NOT to Use section)
-□ 9. Zero hardcoded credentials/secrets (use env var or secret manager)
-□ 10. evals/ folder exists with 2+ evals (1 happy path + 1 edge case)
+â–¡ 1. Name in kebab-case and matches folder name
+â–¡ 2. Description has 50+ words, third person, 5+ trigger phrases, negative boundaries
+â–¡ 3. Every Workflow step is a single, imperative, unambiguous action
+â–¡ 4. At least 2 concrete examples (real input â†’ real output)
+â–¡ 5. Edge Cases covered (3+ conditions with specific action)
+â–¡ 6. Output Format explicitly defined (structure, sections, delivery)
+â–¡ 7. Zero vague language ("handle appropriately", "format nicely", "as needed",
+     "quando relevante", "se fizer sentido" â€” all FORBIDDEN)
+â–¡ 8. Negative boundaries also in body (## When NOT to Use section)
+â–¡ 9. Zero hardcoded credentials/secrets (use env var or secret manager)
+â–¡ 10. evals/ folder exists with 2+ evals (1 happy path + 1 edge case)
 ```
 
 Score 7+ = trigger-reliable. Score 10 = ideal.
@@ -39,7 +39,7 @@ adaptar conforme (o )?contexto
 apropriadamente
 adequadamente
 de forma apropriada
-conforme necessário
+conforme necessÃ¡rio
 ```
 
 These phrases leave execution up to the LLM's guessing. Non-Claude models
@@ -57,12 +57,12 @@ Every V3 skill has these 13 sections in this order:
 4. `## When NOT to Use` (confusable cases + alternative skills)
 5. `## Inputs` (table: param / type / required / description)
 6. `## Outputs` (table: field / type / description + delivery format)
-7. `## Workflow` (numbered imperative steps, SE/SENÃO explicit)
+7. `## Workflow` (numbered imperative steps, SE/SENÃƒO explicit)
 8. `## Edge Cases` (3+ conditions with specific action)
 9. `## Examples` (2+ H3 with real input/output)
 10. `## Dependencies` (APIs, MCPs, env vars, files, other skills)
 11. `## Errors & Recovery` (error / cause / fix table)
-12. `## Notes` (optional — limitations, design decisions)
+12. `## Notes` (optional â€” limitations, design decisions)
 13. `## Changelog` (versions with date)
 
 ---
@@ -76,8 +76,8 @@ routing. It must:
 - Be written in **third person** ("Processes...", not "I process...")
 - Have **50+ words** of substantive content
 - List **5+ trigger phrases** explicitly in quotes or as `/command`
-- End with **negative boundaries**: "NÃO use para: X, Y, Z."
-- Be specific, not generic — a description that could apply to 10 skills is a
+- End with **negative boundaries**: "NÃƒO use para: X, Y, Z."
+- Be specific, not generic â€” a description that could apply to 10 skills is a
   description that triggers for none of them
 
 ---
@@ -114,10 +114,10 @@ Minimum 2 evals per skill: 1 happy path + 1 edge case.
 |------|---------|-----|
 | `missing_frontmatter` | No YAML block | Add `---` frontmatter |
 | `invalid_name` | Name has uppercase/spaces/underscores | Rename to kebab-case |
-| `name_folder_mismatch` | `name:` in YAML ≠ folder name | Sync them |
+| `name_folder_mismatch` | `name:` in YAML â‰  folder name | Sync them |
 | `desc_too_short` | Description < 50 words | Expand with triggers + boundaries |
 | `desc_no_triggers` | < 5 trigger phrases quoted | Add variations of user phrasing |
-| `desc_no_negatives` | No "NÃO use" / "not use" | Append negative boundaries |
+| `desc_no_negatives` | No "NÃƒO use" / "not use" | Append negative boundaries |
 | `desc_first_person` | "Eu crio..." / "I process..." | Rewrite in third person |
 | `no_workflow_section` | Missing `## Workflow` | Add section |
 | `workflow_vague` | Banned language in Workflow | Rewrite specific + imperative |
@@ -141,4 +141,8 @@ but the issues look cosmetic, read the issue list manually before spending
 time on cleanup.
 
 Score 4-5: almost always real structural problems, fix before shipping.
-Score ≤ 3: skill needs rewrite, not polish.
+Score â‰¤ 3: skill needs rewrite, not polish.
+
+
+---
+*Créditos originais da metodologia: [Bruno Okamoto](https://github.com/okjpg)*

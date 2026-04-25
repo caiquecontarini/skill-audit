@@ -1,13 +1,13 @@
----
+﻿---
 name: generate-report
 description: >
   Generates weekly analytics reports from a CSV file with traffic data. Ativa
-  quando o usuário diz "gera o weekly report", "roda o report semanal", "report
-  da semana", "/generate-report", "monta o resumo semanal de tráfego", ou cola
-  um path de CSV pedindo análise. Retorna markdown com top 5 fontes, delta vs
-  semana anterior, e 3 insights priorizados. NÃO use para: reports mensais (usa
-  `monthly-report`); análise ad-hoc de dados arbitrários (usa `data-explorer`);
-  geração de gráficos visuais.
+  quando o usuÃ¡rio diz "gera o weekly report", "roda o report semanal", "report
+  da semana", "/generate-report", "monta o resumo semanal de trÃ¡fego", ou cola
+  um path de CSV pedindo anÃ¡lise. Retorna markdown com top 5 fontes, delta vs
+  semana anterior, e 3 insights priorizados. NÃƒO use para: reports mensais (usa
+  `monthly-report`); anÃ¡lise ad-hoc de dados arbitrÃ¡rios (usa `data-explorer`);
+  geraÃ§Ã£o de grÃ¡ficos visuais.
 type: skill
 category: analytics
 status: ATIVO
@@ -29,9 +29,9 @@ markdown, ready to paste into email or Notion.
 ## When to Use
 
 Aciona quando:
-- Usuário cola path de um CSV e pede análise semanal
+- UsuÃ¡rio cola path de um CSV e pede anÃ¡lise semanal
 - Toda segunda-feira 9h (cron job chama esta skill)
-- Usuário pede "weekly report" / "report da semana"
+- UsuÃ¡rio pede "weekly report" / "report da semana"
 
 Exemplos literais:
 - "gera o weekly report de /data/traffic.csv"
@@ -40,27 +40,27 @@ Exemplos literais:
 
 ## When NOT to Use
 
-NÃO aciona se:
-- Usuário quer report mensal → `monthly-report`
-- Usuário quer análise ad-hoc de dados arbitrários → `data-explorer`
-- Usuário quer gráfico visual → `chart-builder`
+NÃƒO aciona se:
+- UsuÃ¡rio quer report mensal â†’ `monthly-report`
+- UsuÃ¡rio quer anÃ¡lise ad-hoc de dados arbitrÃ¡rios â†’ `data-explorer`
+- UsuÃ¡rio quer grÃ¡fico visual â†’ `chart-builder`
 
 ---
 
 ## Inputs
 
-| Parâmetro | Tipo | Obrigatório | Descrição |
+| ParÃ¢metro | Tipo | ObrigatÃ³rio | DescriÃ§Ã£o |
 |-----------|------|-------------|-----------|
-| csv_path | string | ✅ | Path absoluto do CSV. Colunas esperadas: date, source, visits |
-| weeks_back | int | ❌ | Quantas semanas comparar (default: 1) |
+| csv_path | string | âœ… | Path absoluto do CSV. Colunas esperadas: date, source, visits |
+| weeks_back | int | âŒ | Quantas semanas comparar (default: 1) |
 
 ## Outputs
 
-| Campo | Tipo | Descrição |
+| Campo | Tipo | DescriÃ§Ã£o |
 |-------|------|-----------|
 | report | markdown | Report formatado, 300-500 palavras |
 | top_sources | array | Top 5 fontes com visits + % |
-| delta | object | Variação vs semana anterior (visits, %) |
+| delta | object | VariaÃ§Ã£o vs semana anterior (visits, %) |
 | insights | array | 3 strings priorizadas |
 
 Formato de entrega: arquivo markdown em `./reports/weekly-YYYY-MM-DD.md`.
@@ -69,12 +69,12 @@ Formato de entrega: arquivo markdown em `./reports/weekly-YYYY-MM-DD.md`.
 
 ## Workflow
 
-1. **Validar CSV** — abrir `csv_path`, confirmar colunas `date`, `source`, `visits`
-2. **SE colunas faltando → abortar com erro específico**
-3. **Filtrar semana atual** — últimos 7 dias
-4. **Agrupar por source** — sum visits, sortear desc
-5. **Filtrar semana anterior** — dias 8-14
-6. **Calcular delta** — (atual - anterior) / anterior * 100
+1. **Validar CSV** â€” abrir `csv_path`, confirmar colunas `date`, `source`, `visits`
+2. **SE colunas faltando â†’ abortar com erro especÃ­fico**
+3. **Filtrar semana atual** â€” Ãºltimos 7 dias
+4. **Agrupar por source** â€” sum visits, sortear desc
+5. **Filtrar semana anterior** â€” dias 8-14
+6. **Calcular delta** â€” (atual - anterior) / anterior * 100
 7. **Extrair top 5 sources** da lista agrupada
 8. **Gerar 3 insights** baseados em: maior gain, maior loss, nova fonte
 9. **Renderizar markdown** no template `reports/template.md`
@@ -85,16 +85,16 @@ Formato de entrega: arquivo markdown em `./reports/weekly-YYYY-MM-DD.md`.
 
 ## Edge Cases
 
-- **Se CSV vazio** → retornar report com "Sem dados disponíveis"
-- **Se apenas 1 semana de histórico** → omitir delta, marcar "sem comparação"
-- **Se mais de 50 sources** → agregar cauda em "Outros"
-- **Se CSV com encoding errado** → tentar UTF-8 → Latin-1 → abortar
+- **Se CSV vazio** â†’ retornar report com "Sem dados disponÃ­veis"
+- **Se apenas 1 semana de histÃ³rico** â†’ omitir delta, marcar "sem comparaÃ§Ã£o"
+- **Se mais de 50 sources** â†’ agregar cauda em "Outros"
+- **Se CSV com encoding errado** â†’ tentar UTF-8 â†’ Latin-1 â†’ abortar
 
 ---
 
 ## Examples
 
-### Example 1 — Happy path
+### Example 1 â€” Happy path
 **Input:** `generate-report /data/traffic.csv`
 **Workflow:**
 1. Abre CSV com 14 dias de dados, 8 sources
@@ -103,34 +103,34 @@ Formato de entrega: arquivo markdown em `./reports/weekly-YYYY-MM-DD.md`.
 
 **Output:**
 ```markdown
-# Weekly Report — 2026-04-19
+# Weekly Report â€” 2026-04-19
 
 **Total visits:** 12,340 (+8% vs semana anterior)
 
 ## Top 5 Sources
-1. Google — 5,234 (42%)
-2. Twitter — 2,108 (17%)
-3. Direct — 1,890 (15%)
-4. ProductHunt — 812 (7%) 🆕
-5. LinkedIn — 754 (6%)
+1. Google â€” 5,234 (42%)
+2. Twitter â€” 2,108 (17%)
+3. Direct â€” 1,890 (15%)
+4. ProductHunt â€” 812 (7%) ðŸ†•
+5. LinkedIn â€” 754 (6%)
 
 ## Insights
-- ProductHunt é nova fonte, 7% do tráfego total
-- Twitter caiu 15% vs semana anterior — investigar
+- ProductHunt Ã© nova fonte, 7% do trÃ¡fego total
+- Twitter caiu 15% vs semana anterior â€” investigar
 - Google cresceu +12%, provavelmente ganho de ranking
 ```
 
-### Example 2 — Edge case (sem histórico)
+### Example 2 â€” Edge case (sem histÃ³rico)
 **Input:** `generate-report /data/new-site.csv`
 **Workflow:**
-1. CSV tem só 5 dias, não dá pra comparar semana
-2. Retorna report sem seção de delta
+1. CSV tem sÃ³ 5 dias, nÃ£o dÃ¡ pra comparar semana
+2. Retorna report sem seÃ§Ã£o de delta
 
 **Output:**
 ```markdown
-# Weekly Report — 2026-04-19
+# Weekly Report â€” 2026-04-19
 
-**Total visits:** 420 (primeira semana — sem comparação)
+**Total visits:** 420 (primeira semana â€” sem comparaÃ§Ã£o)
 ...
 ```
 
@@ -149,7 +149,7 @@ Formato de entrega: arquivo markdown em `./reports/weekly-YYYY-MM-DD.md`.
 | Erro | Causa | Fix |
 |------|-------|-----|
 | `ColumnError: missing 'source'` | CSV sem coluna esperada | Verificar header do CSV |
-| `UnicodeDecodeError` | Encoding não-UTF8 | Salvar CSV como UTF-8 |
+| `UnicodeDecodeError` | Encoding nÃ£o-UTF8 | Salvar CSV como UTF-8 |
 | `PermissionError: reports/` | Pasta sem write | `chmod +w reports/` |
 
 ---
@@ -157,10 +157,14 @@ Formato de entrega: arquivo markdown em `./reports/weekly-YYYY-MM-DD.md`.
 ## Notes
 
 Template do report em `reports/template.md` pode ser customizado. Campos entre
-`{{ }}` são substituídos no step 9.
+`{{ }}` sÃ£o substituÃ­dos no step 9.
 
 ---
 
 ## Changelog
 
-- v1.0 (2026-04-19): Versão inicial
+- v1.0 (2026-04-19): VersÃ£o inicial
+
+
+---
+*Créditos originais da metodologia: [Bruno Okamoto](https://github.com/okjpg)*

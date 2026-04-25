@@ -1,4 +1,4 @@
----
+﻿---
 name: generate-report
 description: Generate weekly report for user.
 ---
@@ -15,3 +15,7 @@ Looks at the data and creates a report. Uses the right format as needed.
 ## Usage
 
 Run when the user asks for a report.
+
+
+---
+*Créditos originais da metodologia: [Bruno Okamoto](https://github.com/okjpg)*
